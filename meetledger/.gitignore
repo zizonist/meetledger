@@ -1,0 +1,5 @@
+/bin-java/
+/logs/
+.classpath
+/.settings/
+.project

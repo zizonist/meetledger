@@ -1,0 +1,8 @@
+namespace java com.sds.blockchain.meet.thrift.service
+
+include "meet_meta.thrift"  
+
+service LedgerService{
+	void sendMessage(1: meet_meta.TMessage message);
+	list<string> syncPeer(1: meet_meta.TPeer peer);
+} 

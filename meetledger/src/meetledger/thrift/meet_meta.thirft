@@ -1,0 +1,10 @@
+namespace java com.sds.blockchain.meet.thrift.meta
+ 
+struct TMessage{
+	1: binary message 
+}  
+
+struct TPeer{
+	1: string ip
+	2: i32 port
+}

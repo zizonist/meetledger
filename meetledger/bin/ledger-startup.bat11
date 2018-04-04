@@ -1,0 +1,23 @@
+@echo off
+SETLOCAL EnableDelayedExpansion
+set LEDGER_HOME=D:\blockchain\meetledger
+set LIB_PATH=%LEDGER_HOME%\lib
+set VERSION=0.0.1
+set JAR_NAME=meet-ledger-%VERSION%.jar
+set CLASSPATH=.
+set CMD_LINE_ARGS=%* 
+set MAINCLASS=meetledger.MeetLedger
+
+set tmpfile=__tmp.tmp
+
+dir %LIB_PATH% /b *.jar > %tmpfile%
+
+for /f "tokens=*" %%i in ('type %tmpfile%') do (  
+		set CLASSPATH=!CLASSPATH!;%LIB_PATH%\%%i
+	) 
+del %tmpfile%
+
+rem echo %CLASSPATH:~1%
+ 
+echo java -cp %CLASSPATH% %MAINCLASS% %CMD_LINE_ARGS%
+java -cp %CLASSPATH% -Dledger.conf=../conf/ledger.properties  %MAINCLASS% start %CMD_LINE_ARGS%

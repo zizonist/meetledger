@@ -1,0 +1,22 @@
+#!/bin/bash
+MEETLEDGER_HOME=/home/zizonist/meetledger
+BIN_PATH=$MEETLEDGER_HOME/bin
+LIB_PATH=$MEETLEDGER_HOME/lib
+VERSION=0.0.1
+JAR_NAME=meet-ledger-$VERSION_.jar
+CLASSPATH=.
+CMD_LINE_ARGS=$@
+MAINCLASS=com.sds.blockchain.meet.MeetLedger
+LIB_PATH_JAR=$LIB_PATH/*
+
+
+for f in $LIB_PATH_JAR
+do
+        CLASSPATH=$CLASSPATH:$f
+done
+
+
+echo $CMD_LINE_ARGS
+echo $CLASSPATH
+
+java -cp $CLASSPATH -Dledger.conf=$MEETLEDGER_HOME/conf/ledger.properties  $MAINCLASS $CMD_LINE_ARGS

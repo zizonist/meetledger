@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<project name="meet-ledger" default="jars" basedir="."> 
+	<property name="name" value="meet-ledger"/>
+	<property name="version" value="0.0.1"/> 
+	<property name="src.dir" value="src"/>
+	<property name="build.dir" value="bin-java"/>
+	<property name="classes.dir" value="${build.dir}"/>
+	<property name="jar.file" value="lib/${name}-${version}.jar"/> 
+	
+	<path id="classpath">
+		<fileset dir="lib" includes="*.jar"></fileset>
+	</path>
+	
+	<target name="jars">
+	 <jar
+	  jarfile="${jar.file}"
+	  basedir="${classes.dir}" 
+	  manifest="META-INF/MANIFEST.MF">
+	 </jar>
+	</target> 
+	
+	<target name="clean">
+	 <delete dir="${build.dir}" />
+	 <mkdir dir="${build.dir}" />
+	 <delete file="${jar.file}"/> 
+	</target>
+	
+	<target name="compile">
+		<javac destdir="${build.dir}" 
+			encoding="UTF-8" debug="true" includeantruntime="false"
+			classpathref="classpath">
+			<src path="${src.dir}" />
+		</javac>
+		<copy todir="${build.dir}">
+			<fileset dir="${src.dir}" includes="**/*.xml"></fileset>
+		</copy>
+	</target>
+	
+	<target name="all" depends="clean, compile, jars"/>
+</project>
